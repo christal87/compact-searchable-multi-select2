@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Custom Select2 multiple options</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    <!--icon class req'd: bi bi-chevron-bar-expand-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
+    <link rel="stylesheet" href="css/select2/4.0.13/custom/select2.compactSearchableMultiSelectionAdapter.css"></link>
+    
+    <!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.js"></script>-->
+
+    <!--select2 int'l language file (hu)-->
+    <script src="js/select2/4.0.13/i18n/hu.js"></script>
+    
+    <!--custom select2 js modules implementing a compact combobox counting selected options,
+    a readable result list appearance /w search functionality-->
+    <!--<script src="js/select2/4.0.13/custom/select2.compactSearchableMultiSelectionAdapter.js"></script>-->
+    <script src="js/select2/4.0.13/custom/select2.compactSearchableMultiSelectionAdapter.min.js"></script>
+
+  </head>
+  <body style='background-color: navy'>
+    <header></header>
+    <main>
+    <form class="container">
+        <div class="col-md-2" style="border: none;">
+            <!--<div class="input-group mb-3">-->
+                <!--optional one-click select all or none functionality-->
+                <!--<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Kijelöl</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Mind</a></li>
+                    <li><a class="dropdown-item" href="#">Semmi</a></li>
+                </ul>-->
+                <select class="form-select form-select-sm js-example-custom-multiple" data-placeholder="Válassz, keress" multiple="multiple">
+                    <option value="1">Kiadható</option>
+                    <option value="2" selected>Nem kiadható</option>
+                    <option value="3">Aktív</option>
+                    <option value="4">Inaktív</option>
+                    <option value="5">Jövedéki termék</option>
+                    <option value="6">Nem jövedéki termék</option>
+                    <option value="7">Árlistában szerepelhet</option>
+                    <option value="8">Árlistában nem szerepelhet</option>
+                    <option value="9">Webshopban megjelenik</option>
+                    <option value="10">Webshopban nem jelenik meg</option>
+                    <option value="11">Kiárusítás alatt</option>
+                    <option value="12">Nincs kiárusítás alatt</option>
+                    <option value="13">Exportra kiadható</option>
+                    <option value="14">Exportra nem adható ki</option>
+                    <option value="15">kertesgep.hu-n</option>
+                    <option value="16">nincs kertesgep.hu-n</option>
+                    <option value="17">kertigepek.hu-n</option>
+                    <option value="18">nincs kertigepek.hu-n</option>
+
+
+
+                </select>
+            <!--</div>-->
+        </div>
+    </form>
+        <script>
+
+            //init custom select2 selectbox
+            $(document).ready(function() {
+                $('.js-example-custom-multiple').select2({
+                    theme: 'bootstrap-5', //use bs5 theme
+                    selectionCssClass: 'select2--small',
+                    dropdownCssClass: 'select2--small',
+                    dropdownAutoWidth: true,
+                    language: 'hu', //override lang to hu
+                    //placeholder: 'Válassz', //already set in select tag's data-placeholder attribute
+                    closeOnSelect: false, //don't close listbox after every select/unselect event (bs-select behavior)
+                    //allowClear: true, //Provides support for clearable selections
+                    c_allowSearch: true, //custom option to enable/disable search functionality (default: false)
+                    //c_searchPlacement: 'combobox', //custom option to switch placement of the search input into dropdown/combobox (default: dropdown)
+                    c_dropdownIcon: '<i class="bi bi-chevron-bar-expand"></i>', //custom option to sufffix the total/selected counter text with text/html
+                    c_counterSuffix: 'kiválasztva', //custom option to suffix the total/selected counter with text/html
+                    c_multiSelIcon: '<i class="bi bi-check2-all"></i>', //custom option adds multiple selected icon to main element with text/html
+                    c_singleSelIcon: '<i class="bi bi-check2"></i>', //custom option adds single selected icon to main element with text/html
+                    //minimumInputLength: 3, // Minimum number of characters required to start a search
+                    //maximumInputLength: 3, // Maximum number of characters that may be provided for a search term
+                    //minimumResultsForSearch: 3, // The minimum number of results required to display the search box
+                    c_selectedIcon: '<i class="bi bi-check-circle-fill" style="float: right;"></i>',
+                    selectionAdapter: CountSelectionAdapter, //pass modified selection box
+                    resultsAdapter: CheckIconResultsAdapter, //pass modified result list
+                    debug: true, //shows more debug msgs???
+                });
+                
+                //disable search field on-the-fly? doesn't work
+                /*$('.js-example-custom-multiple').on('select2:opening select2:closing', function( event ) {
+                    var $searchfield = $(this).parent().find('.select2-search__field');
+                    $searchfield.prop('disabled', true);
+                });*/
+                
+            });
+
+        </script>
+    </main>
+    <footer></footer>
+  </body>
+</html>

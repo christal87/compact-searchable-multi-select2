@@ -1,0 +1,13 @@
+.select2-container--bootstrap-5 .select2-selection {
+	width: 110%;
+	border: none !important;
+}
+
+.select2-container--bootstrap-5.select2-container--focus .select2-selection, .select2-container--bootstrap-5.select2-container--open .select2-selection {
+	border-color: none !important;
+	box-shadow: none !important;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered {
+    padding-left: 8px !important; 
+}
